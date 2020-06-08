@@ -1,6 +1,6 @@
 <h1>MERN Stack Shopping List</h1>
 <h5>A simple and easy to use app for all your shopping needs</h5>
-Try out the application<a href="https://ancient-badlands-17358.herokuapp.com/">here</a>
+<span>Try out the application<a href="https://ancient-badlands-17358.herokuapp.com/">here</a></span>
 <h3>Technologies Used</h3>
 <img src="https://i.morioh.com/139b757e13.png" alt="MERN-stack" />
 <ul>
