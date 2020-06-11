@@ -4,8 +4,16 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/ItemActions';
 import PropTypes from 'prop-types';
+import ItemModal from './ItemModal';
 
 class ShoppingList extends React.Component{
+
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool.isRequired
+    }
+
     componentDidMount() {
         this.props.getItems();
     }
@@ -18,33 +26,33 @@ class ShoppingList extends React.Component{
         const { items } = this.props.item;
         return(
             <Container>
-                <ListGroup>
+                <ItemModal />
+                <ListGroup id="list">
                     <TransitionGroup className="shopping-list">
                         {items.map(({ _id, name }) => (
-                            <CSSTransition key={_id} classNames="fade" >
-                                <ListGroupItem>
-                                    <Button className="remove-btn" color="danger" size="sm" 
-                                    onClick={this.onDeleteClick.bind(this, _id)}>
+                            <CSSTransition key={_id} classNames="fade" timeout={100} >
+                                <ListGroupItem style={{border: "none", borderBottom: "1px solid rgba(0,0,0,.125)"}}>
+                                    {this.props.isAuthenticated ?
+                                    (<Button className="btn-light btn-outline-danger"
+                                     color="danger" 
+                                     size="sm" 
+                                     onClick={this.onDeleteClick.bind(this, _id)}>
                                         &times;
-                                    </Button>
+                                    </Button> ) : null }
                                     {name}
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
                     </TransitionGroup>
-                </ListGroup>
+                </ListGroup> 
             </Container>
         );
     }
 }
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
-}
-
 const mapStatetoProps = (state) => ({
-    item: state.item
+    item: state.item,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStatetoProps, { getItems, deleteItem })(ShoppingList);

@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
     name: { type: String, required: true},
-    date: {type: Date, default: Date.now}
+    date: {type: Date, default: Date.now},
+    completed : {type: Boolean, default: false},
+    _user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-module.exports = Item = mongoose.model('item', ItemSchema);
+const Item = mongoose.model('Item', ItemSchema);
+module.exports = Item;

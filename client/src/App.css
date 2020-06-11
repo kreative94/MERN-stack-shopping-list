@@ -1,4 +1,62 @@
-.rmove-btn{
+:root {
+    --primary-color: #43B701;
+    --secondary-color: #62DAFB;
+    --text-color: #707070;
+}
+
+html {
+    font-size: 18px;
+}
+
+h1{
+    font-family: 'Dosis', sans-serif;
+    font-weight: 800;
+}
+
+h2, h3, h4{
+    font-family: 'Dosis', sans-serif;
+    font-weight: 700;
+}
+
+h5, h6{
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600;
+}
+
+p, ul, li, span{
+    font-family: "Volkhov", serif;
+}
+
+p{
+    color: var(--text-color);
+}
+
+.navbar-brand {
+    font-family: "Doris", sans-serif;
+    font-weight: 800;
+}
+
+#main {
+    height: 80vh;
+}
+
+#main .container {
+    background: white;
+}
+
+#site-nav .primary{
+    background: var(--primary-color);
+}
+
+.home {
+    background: var(--primary-color);
+}
+
+.home a{
+    color: white;
+}
+
+.btn-light{
     margin-right: 0.5rem;
 }
 
@@ -19,3 +77,75 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
+
+.list-group-item {
+    margin-bottom: 25px;
+}
+
+#hero-content .text {
+    margin-top: 6em;
+    color: white;
+}
+
+#hero {
+    height: 80vh;
+    overflow: hidden;
+    margin-bottom: 70px;
+}
+#list{
+    padding: 0 10em;
+}
+
+#add-item{
+    margin: 0 12em 2em;
+}
+
+#register-form input{
+    margin-bottom: 25px;
+}
+
+#hero .hero-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(8px);
+}
+
+.hero-img img {
+    width: 100%;
+}
+
+#hero-content{ 
+    position: absolute;
+    top: 25%;
+    width: 50%;
+    margin: 0 auto;
+    left: 25%;
+}
+@media screen and (min-width: 150px) {
+    #add-item{
+        margin: 0 1em 2em;
+    }
+
+    #list{
+        padding: 0em;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 720px) {
+    #add-item{
+        margin: 0 5em 2em;
+    }
+
+    
+#hero{
+    height: 100vh;
+}
+
+    #list{
+        padding: 0 3em;
+    }
+
+    
+}
+
