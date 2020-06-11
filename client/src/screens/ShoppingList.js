@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/ItemActions';
 import PropTypes from 'prop-types';
-import ItemModal from './ItemModal';
+import ItemModal from '../components/ItemModal';
 
 class ShoppingList extends React.Component{
 

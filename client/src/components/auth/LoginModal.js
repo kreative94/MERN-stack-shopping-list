@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { clearErrors } from '../../actions/errorActions';
 import { login } from '../../actions/authActions';
-import ShoppingList from '../ShoppingList';
+import ShoppingList from '../../screens/ShoppingList';
 
 class LoginModal extends Component {
     state = {

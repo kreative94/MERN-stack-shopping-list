@@ -18,7 +18,7 @@ class AppNavbar extends Component {
     }
 
     static propTypes = {
-        auth: PropTypes.object.isRequired
+        auth: PropTypes.object.isRequired,
     }
 
     toggle = () => {
@@ -32,19 +32,15 @@ class AppNavbar extends Component {
     }
 
     navAppearance = () => {
-
+        const { isAuthenticated } = this.props.auth;
         // let page = "http://localhost:3000/";
       
         // let windowLocation = window.location.href;
-        let siteNav = document.getElementById('site-nav');
+        const siteNav = document.getElementById('site-nav');
         
         siteNav.classList.remove("mb-5", "bg-primary");
         siteNav.classList.add("home");
-        // if(windowLocation === page)
-        // {
-        //     siteNav.classList.remove("mb-5", "bg-primary");
-        //     siteNav.classList.add("home");
-        // }
+
     }
 
     render() {
@@ -94,7 +90,8 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+
 });
 
 export default connect(mapStateToProps, null)(AppNavbar);

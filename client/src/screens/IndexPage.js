@@ -4,9 +4,9 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/ItemActions';
 import PropTypes from 'prop-types';
-import ItemModal from './ItemModal';
+import ItemModal from '../components/ItemModal';
 import HomePage from './HomePage';
-import ShoppingList from './ShoppingList';
+import ShoppingList from '../screens/ShoppingList';
 //Keeps the endpoint at '/'
 //Changes the component if the user is authenticated or not
 class IndexPage extends React.Component{
