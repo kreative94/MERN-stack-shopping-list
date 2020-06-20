@@ -1,4 +1,4 @@
-<h1>MERN Stack Shopping List</h1>
+<h1>TODOless</h1>
 <h5>A simple and easy to use app for all your shopping needs</h5>
 <span>Try out the application<a href="https://ancient-badlands-17358.herokuapp.com/">here</a></span>
 <h3>Technologies Used</h3>
