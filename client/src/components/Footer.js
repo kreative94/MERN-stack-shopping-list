@@ -13,13 +13,13 @@ import {
 // import LoginModal from "./auth/LoginModal";
 // import Logout from './auth/Logout';
 
-class AppFooter extends Component {
-    
+export default class AppFooter extends Component {
     render() {
         <footer>
             <Container> 
                 <Nav>
                     <NavLink href={About} />
+                    <NavLink href="https://github.com/kreative94"><i class="fab fa-github"></i></NavLink>
                 </Nav>
             </Container>
         </footer>

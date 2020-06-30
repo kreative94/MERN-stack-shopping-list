@@ -1,39 +1,42 @@
-import React from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/ItemActions';
-import PropTypes from 'prop-types';
-import ItemModal from '../components/ItemModal';
-import HomePage from './HomePage';
-import ShoppingList from '../screens/ShoppingList';
-//Keeps the endpoint at '/'
-//Changes the component if the user is authenticated or not
-class IndexPage extends React.Component{
+// import React from 'react';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import HomePage from './HomePage';
+// import ShoppingList from './ShoppingList';
+// //Keeps the endpoint at '/'
+// //Changes the component if the user is authenticated or not
+// class IndexPage extends React.Component{
 
-    static propTypes = ({
-        isAuthenticated: PropTypes.bool.isRequired
-    });
+//     state = {
+//         isAuthenticated: false
+//     }
+    
+//     static propTypes = ({
+//         item: PropTypes.object,
+//         list: PropTypes.object,
+//         isAuthenticated: PropTypes.bool
+//     });
 
-    render() {
-        //If the user is logged in, display the shopping list
-        return(
-           <div>
-                {this.props.isAuthenticated ?
-                    <ShoppingList />
-                :
-                    <HomePage  />
-                }
-           </div>
-        );
-        //if not, display the splashpage 
-    }
-}
+//     render() {
+//         //If the user is logged in, display the shopping list
+//         return(
+//            <div>
+//                 {this.props.isAuthenticated ?
+//                     <ShoppingList />
+//                 :
+//                     <HomePage  />
+//                 }
+//            </div>
+//         );
+//         //if not, display the splashpage 
+//     }
+// }
 
-const mapStatetoProps = (state) => ({
-    item: state.item,
-    isAuthenticated: state.auth.isAuthenticated
-});
+// const mapStatetoProps = (state) => ({
+//     item: state.item,
+//     list: state.list,
+//     isAuthenticated: state.auth.isAuthenticated
+// });
 
 
-export default connect(mapStatetoProps, null)(IndexPage);
+// export default connect(mapStatetoProps, null)(IndexPage);

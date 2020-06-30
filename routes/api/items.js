@@ -2,35 +2,39 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 
-//Item Model
+//Models
 const Item = require('../../models/Item');
+const User = require('../../models/User');
+const List = require('../../models/List');
 
 // @route GET api/items
 // @desc Get all items
-// @access 
-router.get('/', async(req, res) => {
-    //Display message "No items were found." if there are no items.
-    Item.find()
-    .sort({ date: -1 })
-    .populate('user', 'email')
-    .exec()
-    .then(items => res.json(items))
-});
+// @access Private
 
-// @route POST api/items
-// @desc post a new item
-// @access
-router.post('/', auth, (req, res) => {
-    const newItem = new Item({
-        name: req.body.name,
-        date: req.body.date,
-        user: req.body.user
-    });
 
-    newItem.save().then(item => res.json(item));
+// @route GET /api/items/from/:list
+// @desc Gets all items from list id created by current user
+// @access private
+// router.get('/from/:id', (req, res, next) => {
+//     // const currentUser = User.findById(req.user._id);
+//     List.findById({ _id: req.params.id })
+//     .then(() => {
+//         Item.find(
+//             { "listedIn": req.params.list },
+//             'listedIn name id completed',
+//             (err, items) => {
+//                 if (err) throw err;
+//                 res.json(items)
+//             }
+//         );
+//     });
+// });
 
-});
 
+
+
+// @route /api/items/update/:id
+// @desc update an item 
 router.post('/update/:id', auth, (req, res) => {
     Item.findById(req.params.id, (err, item) => {
         if(!item) 
@@ -48,6 +52,8 @@ router.post('/update/:id', auth, (req, res) => {
 });
 
 
+// @route /api/items/delete/:id
+// @desc delete an item
 router.delete('/:id', auth, (req, res) => {
     Item.findById(req.params.id)
     .then(item => item.remove().then(() => res.json({success: true})))

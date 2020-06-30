@@ -92,8 +92,14 @@ p{
     overflow: hidden;
     margin-bottom: 70px;
 }
-#list{
+
+.list{
     padding: 0 10em;
+}
+
+.list-heading{
+    display: inline;
+    margin-right: 10px;
 }
 
 #add-item{
@@ -122,6 +128,41 @@ p{
     margin: 0 auto;
     left: 25%;
 }
+
+.tab-header{
+
+}
+
+.tab-header i {
+    margin: 0;
+}
+
+.tab-header span {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: var(--secondary-color);
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+button i {
+    margin-right: 10px;
+}
+
 @media screen and (min-width: 150px) {
     #add-item{
         margin: 0 1em 2em;
@@ -136,16 +177,10 @@ p{
     #add-item{
         margin: 0 5em 2em;
     }
-
-    
-#hero{
-    height: 100vh;
-}
-
+    #hero{
+        height: 100vh;
+    }
     #list{
         padding: 0 3em;
     }
-
-    
 }
-

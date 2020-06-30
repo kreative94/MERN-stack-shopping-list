@@ -10,6 +10,18 @@ const User = require('../../models/User');
 // @route GET api/users
 // @desc Get all users
 // @access Public
+router.get('/', async(req, res) => {
+    User.find({})
+    .populate('lists')
+    .exec((err, users ) => {
+        if(err) throw console.log(err);
+        res.json(users);
+    });
+});
+
+// @route POST api/users
+// @desc register a new user
+// @access Public
 router.post('/', (req, res) => {
     const {name, email, password} = req.body;
 
@@ -36,7 +48,7 @@ router.post('/', (req, res) => {
                     jwt.sign(
                         { id: user.id },
                         config.get('jwtSecret'),
-                        { expiresIn: 36000 }, 
+                        { expiresIn: 86400 }, 
                         (err, token) => {
                             if(err) throw err;
 
@@ -55,19 +67,6 @@ router.post('/', (req, res) => {
             })
         });
     });
-});
-
-// router.get('/', async(req, res) => {
-//     User.findById(req.params.id)
-//     .sort({ date: -1 })
-//     .populate('item')
-//     .then(users => res.json(users))
-// });
-
-router.get('/', async(req, res) => {
-    User.find()
-    .sort({ date: -1 })
-    .then(users => res.json(users))
 });
 
 module.exports = router;

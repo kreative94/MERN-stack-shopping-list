@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import {
     Button, Modal, ModalHeader,
     ModalBody, Form, FormGroup,
-    Label, Input
+    Label, Input, NavLink, Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/ItemActions';
+import { addItem } from '../../actions/ItemActions';
 import PropTypes from 'prop-types'
+
 class ItemModal extends Component {
     state = {
         modal: false,

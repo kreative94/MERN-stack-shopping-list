@@ -1,16 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const auth = require('../../middleware/auth');
-const authController = require('../../controllers/auth');
-const User = require('../../models/User');
+const User = require('../models/User');
+const config = require('config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 
-// @route POST /api/auth
-// @desc Auth users
-// @access Public
-router.post('/', (req, res) => {
+module.exports.authenticateUser = (req, res) => {
     const {email, password} = req.body;
 
     if(!email || !password) {
@@ -28,7 +21,7 @@ router.post('/', (req, res) => {
                     jwt.sign(
                         { id: user.id },
                         config.get('jwtSecret'),
-                        { expiresIn: 86400 }, 
+                        { expiresIn: 36000 }, 
                         (err, token) => {
                             if(err) throw err;
 
@@ -45,17 +38,10 @@ router.post('/', (req, res) => {
                     )
                 });
         });
-}); 
+}
 
-// router.post('/', authController.authenticateUser); 
-
-// @route GET api/auth/user
-// @desc Get current user
-// @access Private
-router.get('/user', auth, (req, res) => {
+module.exports.getCurrentUser = (req, res) => {
     User.findById(req.user.id)
         .select('-password')
         .then(user => res.json(user));
-});
-
-module.exports = router;
+}

@@ -1,50 +1,63 @@
-import React from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import React, { Fragment, Component } from 'react';
+import { Container, Row, 
+    Nav, NavLink, 
+    NavItem, TabContent,
+    TabPane, Col, ListGroup, 
+    Button, ListGroupItem } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/ItemActions';
+import { getLists, getListsFromUser, deleteList } from '../actions/listActions';
 import PropTypes from 'prop-types';
-import ItemModal from '../components/ItemModal';
+import ListsTabs from '../components/list/ListsTabs';
+import ItemModal from '../components/list/ItemModal';
+import classnames from 'classnames';
 
 class ShoppingList extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAuthenticated: false,
+            activeTab : '1',
+            selectedList: this.activeTab,
+            value: null
+        }       
+    }
 
     static propTypes = {
         getItems: PropTypes.func.isRequired,
+        getLists: PropTypes.func.isRequired,
         item: PropTypes.object.isRequired,
-        isAuthenticated: PropTypes.bool.isRequired
+        list: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool.isRequired,
+        auth: PropTypes.object.isRequired,
     }
 
     componentDidMount() {
         this.props.getItems();
+        this.props.getLists();
+        this.props.getListsFromUser();
     }
 
     onDeleteClick = id => {
         this.props.deleteItem(id);
     }
-    
+
+    onDeleteListClick = id => {
+        this.props.deleteList(id);
+    }
+
     render() {
-        const { items } = this.props.item;
+        const { isAuthenticated, user } = this.props.auth;
+        const { lists } = this.props.list;
         return(
-            <Container>
-                <ItemModal />
-                <ListGroup id="list">
-                    <TransitionGroup className="shopping-list">
-                        {items.map(({ _id, name }) => (
-                            <CSSTransition key={_id} classNames="fade" timeout={100} >
-                                <ListGroupItem style={{border: "none", borderBottom: "1px solid rgba(0,0,0,.125)"}}>
-                                    {this.props.isAuthenticated ?
-                                    (<Button className="btn-light btn-outline-danger"
-                                     color="danger" 
-                                     size="sm" 
-                                     onClick={this.onDeleteClick.bind(this, _id)}>
-                                        &times;
-                                    </Button> ) : null }
-                                    {name}
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup> 
+            <Container className="text-center">
+                    <strong className="text-center">
+                        { user ? `Welcome back, ${user.name}` : null }
+                    </strong> 
+                    <ListsTabs />
             </Container>
         );
     }
@@ -52,7 +65,13 @@ class ShoppingList extends React.Component{
 
 const mapStatetoProps = (state) => ({
     item: state.item,
-    isAuthenticated: state.auth.isAuthenticated
+    list: state.list,
+    getItems: PropTypes.func.isRequired,
+    getLists: PropTypes.func.isRequired,
+    getListsFromUser: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired,
+    isAuthenticated: state.auth.isAuthenticated,
+    auth: state.auth
 });
 
-export default connect(mapStatetoProps, { getItems, deleteItem })(ShoppingList);
+export default connect(mapStatetoProps, { getItems, getListsFromUser, getLists, deleteItem, deleteList })(ShoppingList);

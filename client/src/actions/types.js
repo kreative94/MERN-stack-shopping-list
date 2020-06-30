@@ -1,10 +1,13 @@
 export const GET_ITEMS = 'GET_ITEMS';
+export const GET_USER_LISTS = 'GET_USER_LISTS';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const ITEMS_LOADING = 'ITEMS_LOADING';
 
 export const GET_LISTS = 'GET_LISTS';
 export const ADD_LIST = 'ADD_LIST';
+export const UPDATE_LIST = 'UPDATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const LISTS_LOADING = 'LISTS_LOADING';
 

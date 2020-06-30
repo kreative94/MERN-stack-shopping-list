@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new Schema({
     name: {
@@ -23,19 +24,11 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     }, 
-    items: [{
+    lists: [{
         type: Schema.Types.ObjectId,
-        ref: 'Item'
+        ref: 'List'
     }]
 });
 
 const User = mongoose.model('User', UserSchema);
-
 module.exports = User;
-
-// module.exports = function getUserWithItems(email) {
-//     return User.findOne({ email: email })
-//     .populate('items').exec((err, items) => {
-//         console.log('Populated User ' + items);
-//     })
-// }
