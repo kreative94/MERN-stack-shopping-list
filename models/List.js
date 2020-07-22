@@ -13,13 +13,7 @@ const ListSchema = new Schema({
     owner: {
             type: Schema.Types.ObjectId, 
             ref: 'User'
-        },
-    listItems: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'Item'
         }
-    ]
 });
 
 module.exports = List = mongoose.model('List', ListSchema);

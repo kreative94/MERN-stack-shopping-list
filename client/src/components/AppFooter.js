@@ -6,7 +6,7 @@ import {
     Collapse, 
     Navbar,
     NavbarToggler,
-    NavbarBrand,Nav,NavItem,
+    NavbarBrand, Nav, NavItem,
     NavLink, Container
 } from 'reactstrap';
 // import RegisterModal from "./auth/RegisterModal";
@@ -15,13 +15,14 @@ import {
 
 export default class AppFooter extends Component {
     render() {
-        <footer>
-            <Container> 
-                <Nav>
-                    <NavLink href={About} />
-                    <NavLink href="https://github.com/kreative94"><i class="fab fa-github"></i></NavLink>
-                </Nav>
-            </Container>
-        </footer>
+        return(
+            <footer>
+                <Container> 
+                    <Nav>
+                        <NavLink href="https://github.com/kreative94"><i class="fab fa-github"></i></NavLink>
+                    </Nav>
+                </Container>
+            </footer>
+        )
     }
 }

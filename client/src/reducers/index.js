@@ -10,10 +10,3 @@ export default combineReducers({
     list: listReducer,
     auth: authReducer
 });
-
-// export default combineReducers({
-//     item: itemReducer,
-//     list: listReducer,
-//     error: errorReducer,
-//     auth: authReducer
-// });

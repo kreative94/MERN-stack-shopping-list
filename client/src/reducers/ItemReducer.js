@@ -1,7 +1,7 @@
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEMS, ADD_ITEM, UPDATE_ITEM, 
+    DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initalState = {
-    lists: [],
     items: [],
     loading: false
 }
@@ -22,6 +22,11 @@ export default function(state = initalState, action) {
             return{
                 ...state,
                 items: [action.payload, ...state.items]
+            }
+        case UPDATE_ITEM:
+            return {
+                ...state,
+                items: state.items.filter(item => item._id !== action.payload )
             }
         case ITEMS_LOADING:
             return{

@@ -1,40 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component, useReducer } from 'react';
 import {
     Button, Modal, ModalHeader,
     ModalBody, Form, FormGroup,
-    Label, Input, NavLink, Alert
+    Label, Input
+    //  NavLink, Alert
 } from 'reactstrap';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { addItem } from '../../actions/ItemActions';
+import { addItem, addItemToList } from '../../actions/ItemActions';
+import { getActiveList } from '../../actions/listActions';
 import PropTypes from 'prop-types'
 
 class ItemModal extends Component {
-    state = {
-        modal: false,
-        name: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            name: '',
+            listedIn: '',
+            owner: ''
+        }
     }
 
     static propTypes = {
-        isAuthenticated: PropTypes.bool.isRequired
-    }
-    
-    toggle = () => {
-        this.setState({
-            modal: !this.state.modal
-        });
+        isAuthenticated: PropTypes.bool.isRequired,
+        list: PropTypes.object,
+        item: PropTypes.object,
+        user: PropTypes.object.isRequired,
+        activeList: PropTypes.object.isRequired
     }
 
+    toggle = () => {
+        const { activeList } = this.props.list;
+        const listOfItem = activeList.map((activeList) => { return activeList._id })
+        this.setState({
+            modal: !this.state.modal,
+            owner: this.props.user,
+            listedIn: listOfItem
+        });
+    }
+    
     onChange = e => {
         this.setState({ [e.target.name] : e.target.value });
     }
 
-    onSubmit = e => {
+    onSubmit = (e) => {
         e.preventDefault();
-        
+
         const newItem = {
-            name: this.state.name
+            name: this.state.name,
+            listedIn: this.state.listedIn,
+            owner: this.state.owner  
         }
-        this.props.addItem(newItem);
+
+        this.props.addItemToList(this.state.listedIn, newItem);
 
         this.toggle();
     }
@@ -43,19 +62,20 @@ class ItemModal extends Component {
         return(
             <div>
                 { this.props.isAuthenticated ? 
-                <Button id="add-item" color="light" className="mt-4 btn-outline-primary"
+                <Button id="add-item" color="light" 
+                className="btn-outline-primary"
                 onClick={this.toggle}><i className="fas fa-plus"></i> Add Item</Button>
                     : <h4 className="mb-3 ml-4"> Please login to manage items</h4> }
-                <Modal isOpen={this.state.modal} toggle={this.toggle}>                    
-                    <ModalHeader toggle={this.toggle}>Add to Shopping List</ModalHeader>
+                <Modal className="mt-5" isOpen={this.state.modal} toggle={this.toggle}>      
+                    <ModalHeader toggle={this.toggle}><p>Add new item to list: {this.state.activeList}</p></ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">Item</Label>
-                                <Input type="text" name="name" id="item" placeholder="Add shopping item" 
+                                <Label for="item">Name</Label>
+                                <Input type="text" name="name" id="item" placeholder="cookies, bottle, go to store, etc." 
                                 onChange={this.onChange} />
                                 <Button color="primary" 
-                                style={{marginTop: '2rem'}}
+                                style={{ marginTop: '2rem' }}
                                 block>Add Item</Button>
                             </FormGroup>
                         </Form>
@@ -68,7 +88,12 @@ class ItemModal extends Component {
 
 const mapStateToProps = state => ({
     item: state.item,
+    list: state.list,
+    user: state.auth.user,
+    activeList: state.list.activeList,
+    addItemToList: PropTypes.func.isRequired,
+    getActiveList: PropTypes.func.isRequired,
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {addItem})(ItemModal);
+export default connect(mapStateToProps, { addItem, addItemToList, getActiveList })(ItemModal);

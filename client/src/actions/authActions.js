@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './errorActions';
-import { getListsFromUser } from './listActions';
+
 import {
     USER_LOADED, 
     USER_LOADING, 
@@ -9,8 +9,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    GET_USER_LISTS
+    REGISTER_FAIL
 } from './types';
 
 export const loadUser = () => (dispatch, getState) => {

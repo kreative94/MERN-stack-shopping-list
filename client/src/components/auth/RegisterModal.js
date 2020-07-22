@@ -10,14 +10,12 @@ import { clearErrors } from '../../actions/errorActions';
 import { register } from '../../actions/authActions';
 
 class RegisterModal extends Component {
-    constructor(props) {
-        super(props);
-    }
     state = {
         modal: false,
         name: '',
         email: '',
         password: '',
+        phone: '',
         msg: null
     }
   
@@ -58,10 +56,10 @@ class RegisterModal extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        const {name, email, password } = this.state;
+        const { name, email, password, phone } = this.state;
 
         const newUser = {
-            name, email, password
+            name, email, password, phone
         };
         
         this.props.register(newUser);
@@ -85,6 +83,10 @@ class RegisterModal extends Component {
 
                                 <Label for="email">Email</Label>
                                 <Input type="email" name="email" id="email" placeholder="ex: janedoe91@example.com"
+                                onChange={this.onChange} />
+
+                                <Label for="phone">Phone</Label>
+                                <Input type="text" name="phone" id="Phone" placeholder="5555555555 no dashes or spaces"
                                 onChange={this.onChange} />
 
                                 <Label for="password">Password</Label>

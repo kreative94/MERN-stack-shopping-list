@@ -1,30 +1,23 @@
 :root {
-    --primary-color: #43B701;
-    --secondary-color: #62DAFB;
     --text-color: #707070;
 }
 
 html {
-    font-size: 18px;
+    font-size: 20px;
 }
 
-h1{
-    font-family: 'Dosis', sans-serif;
-    font-weight: 800;
-}
-
-h2, h3, h4{
-    font-family: 'Dosis', sans-serif;
+h1, h2, h3{
+    font-family: 'Josefin Sans', sans-serif;
     font-weight: 700;
 }
 
-h5, h6{
-    font-family: 'Dosis', sans-serif;
-    font-weight: 600;
+h4, h5, h6{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
 }
 
 p, ul, li, span{
-    font-family: "Volkhov", serif;
+    font-family: 'Crimson Text', serif;
 }
 
 p{
@@ -32,7 +25,7 @@ p{
 }
 
 .navbar-brand {
-    font-family: "Doris", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: 800;
 }
 
@@ -42,14 +35,6 @@ p{
 
 #main .container {
     background: white;
-}
-
-#site-nav .primary{
-    background: var(--primary-color);
-}
-
-.home {
-    background: var(--primary-color);
 }
 
 .home a{
@@ -129,10 +114,6 @@ p{
     left: 25%;
 }
 
-.tab-header{
-
-}
-
 .tab-header i {
     margin: 0;
 }
@@ -143,25 +124,11 @@ p{
     text-align: center;
 }
 
-
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: var(--secondary-color);
-}
-
-.nav-tabs {
-    border-bottom: 1px solid var(--secondary-color);
-}
-
 button i {
     margin-right: 10px;
 }
+
+/*============= ListTabs and ListItems==================*/
 
 @media screen and (min-width: 150px) {
     #add-item{

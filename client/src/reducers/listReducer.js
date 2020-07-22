@@ -1,10 +1,14 @@
-import { GET_LISTS, GET_USER_LISTS, GET_ITEMS, 
-    ADD_LIST, DELETE_LIST, 
-    LISTS_LOADING, USER_LOADED } from "../actions/types";
+import { GET_USER_LISTS, 
+    ADD_LIST, DELETE_LIST,
+    UPDATE_LIST,
+    GET_ACTIVE_LIST, 
+    LISTS_LOADING } from "../actions/types";
+// import authReducer from './authReducer';
 
 const initialState = { 
     lists: [],
-    loading: false
+    loading: false,
+    activeList: {}
 }
 
 export default function listReducer(state = initialState, action) {
@@ -13,6 +17,20 @@ export default function listReducer(state = initialState, action) {
             return {
                 ...state,
                 lists: action.payload
+            }
+        case GET_ACTIVE_LIST:
+            return{
+                ...state,
+                activeList: state.lists.filter(
+                    activeList => activeList._id === action.payload
+                )
+            }
+        case UPDATE_LIST: 
+            return {
+                ...state,
+                lists: state.lists.filter(
+                    list => list._id === action.payload
+                )
             }
         case DELETE_LIST:
             return {

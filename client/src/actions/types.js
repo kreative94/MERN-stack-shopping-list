@@ -6,6 +6,8 @@ export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const ITEMS_LOADING = 'ITEMS_LOADING';
 
 export const GET_LISTS = 'GET_LISTS';
+export const GET_LIST_BY_ID = 'GET_LIST_BY_ID';
+export const GET_ACTIVE_LIST = 'GET_ACTIVE_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const UPDATE_LIST = 'UPDATE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';

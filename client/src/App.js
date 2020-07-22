@@ -7,7 +7,8 @@ import store from './store'
 import { loadUser } from "./actions/authActions";
 // import PropTypes from 'prop-types';
 import IndexPage from './screens/IndexPage';
-import ShoppingList from './screens/ShoppingList';
+// import ListDashboard from './screens/ListDashboard';
+
 class App extends React.Component{
 
   componentDidMount() {
@@ -20,8 +21,8 @@ class App extends React.Component{
         {/* <Routes /> */}
         <div id="App" className="App">
           <AppNavbar />
-            <ShoppingList />
-            {/* <IndexPage /> */}
+            {/* <ListDashboard /> */}
+            <IndexPage />
         </div>
         </Provider>
       );

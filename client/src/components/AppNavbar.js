@@ -24,21 +24,6 @@ class AppNavbar extends Component {
         });
     }
 
-    componentDidMount() {
-        // this.navAppearance();
-    }
-
-    // navAppearance = () => {
-    //     // let page = "http://localhost:3000/";
-      
-    //     // let windowLocation = window.location.href;
-    //     const siteNav = document.getElementById('site-nav');
-        
-    //     siteNav.classList.remove("mb-5", "bg-primary");
-    //     siteNav.classList.add("home");
-
-    // }
-
     render(){
         const { isAuthenticated } = this.props.auth;
         const authLinks = (
@@ -63,11 +48,10 @@ class AppNavbar extends Component {
     return(
         <Navbar id="site-nav" 
         color="light" 
-        style={{"borderBottom": "1px solid var(--primary)"}}
-        expand="sm" 
-        className="mb-5">
+        light
+        expand="sm">
             <Container>
-                <NavbarBrand href="/">TODOless</NavbarBrand>
+                <NavbarBrand className="text-center" href="/">TODOless</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>

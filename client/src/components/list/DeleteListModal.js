@@ -1,46 +1,52 @@
 import React, { Component } from 'react';
 import {
     Button, Modal, ModalHeader,
-    ModalBody, Input, Form, FormGroup,
+    ModalBody, Form, FormGroup,
     ButtonGroup
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { updateList } from '../../actions/listActions';
+import { deleteList } from '../../actions/listActions';
 import PropTypes from 'prop-types';
 
-class EditModal extends Component {
+class DeleteListModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
-            open: false,
-            isAuthenticated: false,
-            _id: '',
-            title: '',
-         }
+            msg: null,
+            _id: ''
+        }
+        this.baseState = this.state;
     }
 
     static propTypes = {
         isAuthenticated: PropTypes.bool.isRequired,
-        list: PropTypes.object.isRequired
+        list: PropTypes.object.isRequired,
+        activeList: PropTypes.object.isRequired,
+        deleteList: PropTypes.func.isRequired
     }
     
     toggle = () => {
         const { activeList } = this.props.list;
-        const listId = activeList.map((activeList) => { return activeList._id });
-        
-        const listTitle = activeList.map((activeList) => { 
-            return activeList.title });
+        const listId = activeList.map((activeList) => { 
+            return activeList._id });
 
         this.setState({
             modal: !this.state.modal,
-            _id: listId,
-            title: listTitle
+            _id: listId
+
         });
     }
 
     onChange = e => {
         this.setState({ [e.target.name] : e.target.value });
+    }
+
+    onSubmit = () => {
+        this.props.deleteList(this.state._id);
+
+        this.toggle();
+        this.setState(this.baseState);
     }
 
     onCancel(e) {
@@ -49,35 +55,27 @@ class EditModal extends Component {
         this.toggle();
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-
-        this.setState({ title: this.state.title })
-        
-        this.props.updateList(this.state._id);
-
-        this.toggle();
-    }
     render() {
         return(
             <div>
-                <Button color="warning" onClick={this.toggle} href="#">
-                    Edit
+                <Button color="danger" onClick={this.toggle} href="#">
+                    Delete
                 </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Update</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Delete</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup className="text-center">
-                                <h3> Change title to:
+                                <h3> Are you sure you want to delete 
+                                    this list?
                                 </h3>
+                                <small style={{color: "red"}}>This cannot be undone</small>
                                 <br />
-                                <Input type="text" name="title" id="list" placeholder="ie: Groceries, Office Supplies, School, etc." 
-                                onChange={this.onChange} />
                                 <ButtonGroup>
-                                <Button color="success" 
-                                style={{ marginTop: '2rem' }}
-                                block>Update</Button>
+                                <Button color="danger" 
+                                style={{marginTop: '2rem'}}
+                                block>Delete</Button>
+
                                 <Button color="light" 
                                 onClick={this.onCancel.bind(this)}
                                 style={{marginTop: '2rem'}}
@@ -98,4 +96,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, { updateList })(EditModal);
+export default connect(mapStateToProps, { deleteList })(DeleteListModal);

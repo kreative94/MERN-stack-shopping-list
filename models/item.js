@@ -14,17 +14,16 @@ const ItemSchema = new Schema({
         type: Boolean,
          default: false
         },
-    user: [
-        {
+    owner : {
             type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    ],
-    listedIn: 
-        {type: Schema.Types.ObjectId,
-         ref: 'List'
-        }
-    
+            ref: 'User',
+            required: true
+        },
+    listedIn: {
+        type: Schema.Types.ObjectId,
+        ref: 'List',
+        required: true
+    }
 });
 
 const Item = mongoose.model('Item', ItemSchema);

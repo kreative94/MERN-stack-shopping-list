@@ -7,21 +7,29 @@ import {
 import { connect } from 'react-redux';
 import { addList } from '../../actions/listActions';
 import PropTypes from 'prop-types'
-class ListModal extends Component {
-    state = {
-        modal: false,
-        open: false,
-        isAuthenticated: false
+
+class AddListModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            open: false,
+            isAuthenticated: false,
+            title: '',
+            owner: ''
+         }
     }
 
     static propTypes = {
         isAuthenticated: PropTypes.bool.isRequired,
-        list: PropTypes.object
+        user: PropTypes.object.isRequired,
+        list: PropTypes.object.isRequired
     }
     
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            owner: this.props.user
         });
     }
 
@@ -29,32 +37,38 @@ class ListModal extends Component {
         this.setState({ [e.target.name] : e.target.value });
     }
 
-    onSubmit = e => {
+    onSubmit = (e) => {
         e.preventDefault();
         
         const newList = {
-            title: this.state.title
+            title: this.state.title,
+            owner: this.state.owner
         }
-        this.props.addItem(newList);
+        
+        this.props.addList(newList);
 
         this.toggle();
     }
 
-    
     render() {
+        // const { user } = this.props.auth;
+
         return(
             <div>
-                { this.props.isAuthenticated ? 
-                <Button id="add-item" color="light" className="mt-4 btn-outline-primary"
-                onClick={this.toggle}><i className="fas fa-plus"></i> New List</Button>
-                    : <h4 className="mb-3 ml-4"> Please login to manage items</h4> }
+                <Button id="add-new" color="primary"
+                outline
+                onClick={this.toggle}>
+                    <i className="fas fa-plus"></i>
+                    New List
+                </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>                    
                     <ModalHeader toggle={this.toggle}>Create a new List</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item">List</Label>
-                                <Input type="text" name="name" id="item" placeholder="ie: Groceries, Office Supplies, School, etc." 
+                                {/* <p>{user.id}</p> */}
+                                <Label for="list">List</Label>
+                                <Input type="text" name="title" id="list" placeholder="ie: Groceries, Office Supplies, School, etc." 
                                 onChange={this.onChange} />
                                 <Button color="primary" 
                                 style={{marginTop: '2rem'}}
@@ -70,7 +84,8 @@ class ListModal extends Component {
 
 const mapStateToProps = state => ({
     list: state.list,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 })
 
-export default connect(mapStateToProps, {addList})(ListModal);
+export default connect(mapStateToProps, {addList})(AddListModal);

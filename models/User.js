@@ -17,17 +17,13 @@ const UserSchema = new Schema({
         require: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: false
-    },
+        },
     register_date: {
         type: Date,
         default: Date.now
-    }, 
-    lists: [{
-        type: Schema.Types.ObjectId,
-        ref: 'List'
-    }]
+    }
 });
 
 const User = mongoose.model('User', UserSchema);
