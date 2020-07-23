@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
-const config = require('config');
-const app = express();
 const bodyParser = require('body-parser');
+const config = require('config');
+const path = require('path');
+const app = express();
 
 const items = require('./routes/api/items');
 const auth = require('./routes/api/auth');

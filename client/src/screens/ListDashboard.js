@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col} from 'reactstrap';
-import { Gravatar } from 'react-gravatar';
+// import { Gravatar } from 'react-gravatar';
 import { connect } from 'react-redux';
 import { getItems, addItem, deleteItem } from '../actions/ItemActions';
 import { getListsFromUser, addList, deleteList } from '../actions/listActions';

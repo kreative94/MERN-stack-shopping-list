@@ -3,9 +3,9 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 //Models
-const Item = require('../../models/Item');
-const User = require('../../models/User');
-const List = require('../../models/List');
+const Item = require('../../models/item');
+// const User = require('../../models/User');
+const List = require('../../models/list');
 
 /*======================== GET ===============*/
 
@@ -89,44 +89,8 @@ router.delete('/delete/:id', auth, (req, res) => {
         { $pull: { 'listItems': { "_id": req.params.id }}})
         item.remove().then(() => res.json({success: true}))
     });
-    // .catch(err => res.status(404).json({success: false}));
 });
 
-// router.delete('/delete/:id', auth, (req, res) => {
-//     Item.findById(req.params.id)
-//     .then((item, err) => {
-//         const itemList = Item.findById(req.params.id)
-//         .where("listedIn")
-//         .equals(req.params.id);
-
-//         if( err ) throw err;
-        
-//         else 
-//             List.update({ "_id": itemList },
-//             { $pull: { 'listItems': { "_id": req.params.id }}},
-//                 item.remove().then(() => res.json({success: true}))
-//             )
-//     });
-//     // .catch(err => res.status(404).json({success: false}));
-// });
-
-// .then(item => item.remove().then(() => res.json({success: true})))
-    // .catch(err => res.status(404).json({success: false}));
-
-// router.delete('/delete/:list/:id', auth, (req, res) => {
-//     // const foundUser = User.findById(req.user._id);
-//     const foundList = req.params.list;
-//     const foundItem = req.params.id;
-
-//     List.findByIdAndUpdate( {"_id": foundList}, 
-//         { $pull: { 'listItems': { "_id": foundItem } } },
-//         function(err, foundItem) {
-//             if(err) {
-//                 res.json(err);
-//             }
-//             foundItem.remove().then(() => res.json({ success: true }))
-//         });
-// });
     
 
 module.exports = router;

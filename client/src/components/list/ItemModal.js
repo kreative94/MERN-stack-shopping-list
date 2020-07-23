@@ -1,11 +1,9 @@
-import React, { Component, useReducer } from 'react';
+import React, { Component } from 'react';
 import {
     Button, Modal, ModalHeader,
     ModalBody, Form, FormGroup,
     Label, Input
-    //  NavLink, Alert
 } from 'reactstrap';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { addItem, addItemToList } from '../../actions/ItemActions';
 import { getActiveList } from '../../actions/listActions';

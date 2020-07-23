@@ -30,9 +30,9 @@ class ListItems extends React.Component {
     }
     
     onEditItemClick = id => {
-        const foundItem = {
-            name: this.state.name
-        }
+        // const foundItem = {
+        //     name: this.state.name
+        // }
     }
 
     render() {

@@ -182,16 +182,17 @@ Button.propTypes = {
     // use close prop for BS4 close icon utility
     close: PropTypes.bool,
   }
-
-const Styles = {
-    tabs:{
-        borderColor: "var(--primary)",
-        color: "white",
-        backgroundColor: "var(--primary)",
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0
-    }
-};
+  
+//Will be used in the near future. Do not delete
+// const Styles = {
+//     tabs:{
+//         borderColor: "var(--primary)",
+//         color: "white",
+//         backgroundColor: "var(--primary)",
+//         borderBottomLeftRadius: 0,
+//         borderBottomRightRadius: 0
+//     }
+// };
 
 const mapStatetoProps = state => ({
     list: state.list,

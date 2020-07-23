@@ -12,8 +12,8 @@ const ListSchema = new Schema({
         },
     owner: {
             type: Schema.Types.ObjectId, 
-            ref: 'User'
+            ref: 'user'
         }
 });
 
-module.exports = List = mongoose.model('List', ListSchema);
+module.exports = List = mongoose.model('list', ListSchema);

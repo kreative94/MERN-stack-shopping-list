@@ -16,15 +16,14 @@ const ItemSchema = new Schema({
         },
     owner : {
             type: Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'user',
             required: true
         },
     listedIn: {
         type: Schema.Types.ObjectId,
-        ref: 'List',
+        ref: 'list',
         required: true
     }
 });
 
-const Item = mongoose.model('Item', ItemSchema);
-module.exports = Item;
+module.exports = Item = mongoose.model('item', ItemSchema);
