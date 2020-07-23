@@ -3,10 +3,16 @@ const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
 const app = express();
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+
+const items = require('./routes/api/items');
+const auth = require('./routes/api/auth');
+const lists = require('./routes/api/lists');
+const users = require('./routes/api/users');
 
 //Body Parser Middleware
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json());
 
 //Db config
 const db = config.get('mongoURI');
@@ -20,10 +26,10 @@ mongoose.connect(db, {
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log(err));
 
-app.use('/api/items', require('./routes/api/items'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/lists', require('./routes/api/lists'));
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api/items', items);
+app.use('/api/auth', auth);
+app.use('/api/lists', lists);
+app.use('/api/users', users);
 
 //Server static assets if in production
 if(process.env.NODE_ENV) {
@@ -33,6 +39,7 @@ if(process.env.NODE_ENV) {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
-// const port = process.env.PORT || 5000;
 
-app.listen(process.env.PORT || 5000, () => console.log(`Server started on port ${port}`));
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
