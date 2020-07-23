@@ -1,21 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('config');
-const path = require('path');
-const app = express();
-
+// const config = require('config');
 const items = require('./routes/api/items');
 const auth = require('./routes/api/auth');
 const lists = require('./routes/api/lists');
 const users = require('./routes/api/users');
+const path = require('path');
+const app = express();
+
 
 //Body Parser Middleware
 // app.use(express.json());
 app.use(bodyParser.json());
 
 //Db config
-const db = config.get('mongoURI');
+// const db = config.get('mongoURI');
+const db = require('./config/database').mongoURI;
 
 mongoose.connect(db, { 
     useNewUrlParser: true,
