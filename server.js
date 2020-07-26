@@ -1,17 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-// const config = require('config');
+// const bodyParser = require('body-parser');
+const config = require('config');
 const path = require('path');
 const app = express();
 
 //Body Parser Middleware
-// app.use(express.json());
-app.use(bodyParser.json());
+app.use(express.json());
+// app.use(bodyParser.json());
 
 //Db config
-// const db = config.get('mongoURI');
-const db = require('./config/database').mongoURI;
+const db = config.get('mongoURI');
+// const db = require('./config/database').mongoURI;
 
 mongoose.connect(db, { 
     useNewUrlParser: true,
@@ -33,7 +33,7 @@ app.use('/api/lists', lists);
 app.use('/api/users', users);
 
 //Server static assets if in production
-if(process.env.NODE_ENV === 'production') {
+if(process.env.NODE_ENV) {
     //Set static folder
     app.use(express.static('client/build'));
     app.get('*', (req, res) => {
