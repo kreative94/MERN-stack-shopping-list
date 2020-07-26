@@ -2,10 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 // const config = require('config');
-const items = require('./routes/api/items');
-const auth = require('./routes/api/auth');
-const lists = require('./routes/api/lists');
-const users = require('./routes/api/users');
 const path = require('path');
 const app = express();
 
@@ -25,6 +21,11 @@ mongoose.connect(db, {
     })
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log(err));
+
+const items = require('./routes/api/items');
+const auth = require('./routes/api/auth');
+const lists = require('./routes/api/lists');
+const users = require('./routes/api/users');
 
 app.use('/api/items', items);
 app.use('/api/auth', auth);
