@@ -16,14 +16,14 @@ const { MONGO_URI, PORT } = config;
 const app = express();
 
 //Body Parser Middleware
-// app.use(cors());
+app.use(cors());
 // app.use(express.json());
 app.use(bodyParser.json());
 
 //Db config
 // const db = config.get('mongoURI');
 // const db = require('./config/database').mongoURI;
-const db = `${MONGO_URI}` || require('./config/database').mongoURI;
+const db = `${MONGO_URI}`;
 
 mongoose.connect(db, { 
     useNewUrlParser: true,
@@ -48,5 +48,6 @@ if(process.env.NODE_ENV) {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
-
+// const port = 5000;
+// app.listen(port, () => console.log(`Server started on port ${port}`));
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
