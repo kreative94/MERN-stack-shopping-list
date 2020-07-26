@@ -3,8 +3,8 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 //Models
-const List = require('../../models/list');
-const Item = require('../../models/item');
+const List = require('../../models/List');
+const Item = require('../../models/Item');
 /*======================== GET ===============*/
 
 /**

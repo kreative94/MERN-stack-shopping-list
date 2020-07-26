@@ -3,8 +3,8 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 //Controllers
-const List = require('../../models/list');
-const User = require('../../models/user');
+const List = require('../../models/List');
+const User = require('../../models/User');
 
 /*===================== GET =======================*/
 //Get all Lists
