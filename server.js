@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-const config = require('config');
+const bodyParser = require('body-parser');
+// const config = require('config');
 const items = require('./routes/api/items');
 const auth = require('./routes/api/auth');
 const lists = require('./routes/api/lists');
@@ -10,12 +10,12 @@ const path = require('path');
 const app = express();
 
 //Body Parser Middleware
-app.use(express.json());
-// app.use(bodyParser.json());
+// app.use(express.json());
+app.use(bodyParser.json());
 
 //Db config
-const db = config.get('mongoURI');
-// const db = require('./config/database').mongoURI;
+// const db = config.get('mongoURI');
+const db = require('./config/database').mongoURI;
 
 mongoose.connect(db, { 
     useNewUrlParser: true,
@@ -30,8 +30,6 @@ app.use('/api/items', items);
 app.use('/api/auth', auth);
 app.use('/api/lists', lists);
 app.use('/api/users', users);
-
-process.env.NODE_ENV = 'production';
 
 //Server static assets if in production
 if(process.env.NODE_ENV === 'production') {
