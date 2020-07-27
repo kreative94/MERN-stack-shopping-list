@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 const path = require('path');
 const config = require('./config');
 
@@ -11,12 +12,13 @@ const authRoute = require('./routes/api/auth');
 const listsRoute = require('./routes/api/lists');
 const usersRoute = require('./routes/api/users');
 
-const { MONGO_URI, MONGO_DB_NAME, PORT, NODE_ENV } = config;
+const { MONGO_URI, MONGO_DB_NAME, NODE_ENV } = config;
 
 // const { MONGO_URI } = "mongodb+srv://khofler:Sekirei11%21@cluster0-nnhyq.mongodb.net/list?retryWrites=true&w=majority"
 const app = express();
 //Body Parser Middleware
 app.use(cors());
+app.use(morgan('dev'));
 // app.use(express.json());
 app.use(bodyParser.json());
 //Db config
@@ -43,11 +45,14 @@ app.use('/api/users', usersRoute);
 //Server static assets if in production
 if(process.env.NODE_ENV === 'production') {
     //Set static folder
-    app.use(express.static('client/build'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
+    // app.use(express.static('client/build'));
+    // app.get('*', (req, res) => {
+    //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    // });
+
+    app.use('*', express.static(path.join(__dirname, 'client', 'build')));
 }
-// const port = 5000;
+
+const PORT = process.env.PORT || 8080;
 // app.listen(port, () => console.log(`Server started on port ${port}`));
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
