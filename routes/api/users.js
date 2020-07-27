@@ -5,7 +5,7 @@ const config  = require('../../config');
 const jwt = require('jsonwebtoken');
 
 //user Model
-const User = require('../../models/User');
+const User = require('../../models/user');
 
 const { JWT_SECRET } = config;
 // @route GET api/users
