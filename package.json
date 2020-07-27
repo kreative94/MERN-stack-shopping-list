@@ -30,5 +30,8 @@
     "mongoose-autopopulate": "^0.12.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.3.0"
   }
 }
